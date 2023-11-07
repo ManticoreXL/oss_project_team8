@@ -3,7 +3,7 @@
 ## Title
 광운대학교 먹리스트 룰렛
 
-![titleimage](./readmemdimage01.jpg)
+![titleimage](readmemdimage1.jpg)
 ## Abstract
 - 식사 메뉴 고르느라 무한고민하는 사람들을 위한 식당 추천 사이트
 - 아래 기능을 포함하는 Web을 JS+HTML+CSS를 기반으로 구현한다.
