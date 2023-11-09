@@ -20,17 +20,6 @@
 - HTML Document 작성 및 CSS 스타일링
 
 ## Project Schedule
-<style>
-tr:nth-child(even) {
-  background-color: #003399! important;
-}
-</style>
-| <!--blank--> | 11/02 ~ 11/09 | 11/10 ~ 11/16 | 11/17 ~ 11/23 | 11/24 ~ 11/30 |
-| ---          | ---           | ---           | ---           | ---           |
-| Project setup        | | | | |
-| Fleshing out details | | | | |
-| Working on JavaScript| | | | |
-| Working on HTML+CSS  | | | | |
 - 프로젝트 셋업: 2023년 11월 02일 ~ 2023년 11월 09일
 - 세부사항 설계: 2023년 11월 10일 ~ 2023년 11월 16일
 - 주요 기능 구현: 2023년 11월 17일 ~ 2023년 11월 27일
