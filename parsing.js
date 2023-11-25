@@ -17,12 +17,25 @@ function parseData(data) {
     const stores = [];
 
     lines.forEach(line => {
-        const [name, location, genre, foodType, priceInfo, costPerformance] = line.split('\t');
+        // 빈 줄 무시
+        if (!line.trim()) {
+            return;
+        }
+
+        const [name, location, distance, genre, foodType, priceInfo, costPerformance] = line.split('\t');
+        
+        // split 결과 확인
+        if (!priceInfo) {
+            console.error('Error parsing data. Check the format of the data file.');
+            return;
+        }
+
         const prices = priceInfo.split(/\s+/).filter(Boolean);
 
         const store = {
             name,          // 식당 이름
             location,      // 위치
+            distance,      // 도보 기준 거리
             genre,         // 장르
             foodType,      // 음식 종류
             price: prices[0],  // 가격
