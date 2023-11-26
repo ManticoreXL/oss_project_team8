@@ -42,98 +42,60 @@
     <!-- JS코드 작성 // 자료구조 및 룰렛 함수 -->
     <script>
         // 방향
-        const direction = {
-            KwangwoonStreet: 1, // 광운로
-            RearGate: 2 // 후문
+        const resto = {
+            name:"일심해장국",
+            location:"광운대역좌측",
+            distance:"10분",
+            genre:"한식",
+            foodType:"국밥,비빔밥",
+            price:"보통",
+            costPerformance:"6000d원"
         }
 
-        // 음식 종류 (메뉴의 대분류 태그)
-        const foodType = {
-            Korean: 1, // 한식
-            KoreanChinese: 2, // 중화요리
-            Japanese: 3, // 일식
-            Vietnamese: 4, // 베트남요리
-            Western: 5, // 양식
-            Snack: 6, // 분식
-            QuickBite: 7, // 간편식(핫도그, 토스트 등)
-            Bread: 8, // 빵집
-            Desert: 9, // 디저트(아이스크림, 빙수 등)
-            Drink: 10, // 카페, 음료(쥬시 등)
-            ConvenStore: 11 // 편의점 분류
-        }
-
-        // 메뉴 종류 (복수 포함 가능)
-        const menuType = {
-            // 한식
-            deopbab: "덮밥",
-            jeyuk: "제육볶음",
-            kimbab: "김밥",
-            rice: "백반", // 반찬이 여러 개인 백반 (철판집 제외)
-            pork: "고깃집",
-            budaejjigae: "부대찌개",
-            soonjji: "순두부찌개", // 순두부찌개
-            noddle: "국수",
-
-            // 일식
-            curtlet: "돈까스",
-            udon: "우동",
-            ramen: "라멘",
-            curry: "카레", // 일본식, 동남아식 포함
-
-            // 중화요리+베트남요리
-            jjajang: "짜장",
-            jjambbong: "짬뽕",
-            maratang: "마라탕",
-            bokkeumbab: "볶음밥", // 한식, 중화식, 베트남식 포함
-            pho: "쌀국수",
-            
-            // 양식+간편식
-            pizza: "피자",
-            burger: "햄버거",
-            pasta: "파스타",
-            corndog: "핫도그",
-            toast: "토스트",
-            burritto: "부리또",
-            doughnuts: "도넛",
-            waffle: "와플",
-            chicken: "치킨",
-
-            // 40~49 분식
-            tteogbokki: "떡볶이",
-
-            // 50~59 특수분류, 빵+디저트+음료
-            franchise: "프랜차이즈", // 프랜차이즈인 경우 포함
-            bread: "빵집", // 빵집은 이 메뉴 태그만 포함
-            iceCream: "아이스크림", // 베스킨라빈스, 나뚜루 등
-            bingSu: "빙수",
-            coffee: "커피",
-            milktea: "밀크티",
-            juice: "주스",
-        }
-
-        // 가격 분류
-        const price = {
-            efficency: 1, // 가성비 (제일 싼 메뉴 6000원 이하)
-            affordable: 2, // 저렴 (5000~6999)
-            average: 3, // 중간 (7000~9999)
-            over10k: 4, // 만원+
-        }
-
-        let list = [];
+        insertToList(resto);
 
         function insertToList(restaurant) {
             let div = document.createElement("div");
+            
+            // restaurant의 각 데이터 키를 읽고 구를 만들어 삽입
+            let nameElem = document.createElement("h3");
+            nameElem.textContent = restaurant.name;
+            div.appendChild(nameElem);
 
+            let locationElem = document.createElement("p");
+            locationElem.textContent = restaurant.location;
+            div.appendChild(locationElem);
+
+            let distanceElem = document.createElement("p");
+            distanceElem.textContent = restaurant.distance;
+            div.appendChild(distanceElem);
+
+            let genreElem = document.createElement("p");
+            genreElem.textContent = restaurant.genre;
+            div.appendChild(genreElem);
+
+            let foodTypeElem = document.createElement("p");
+            foodTypeElem.textContent = restaurant.foodType;
+            div.appendChild(foodTypeElem);
+
+            let priceElem = document.createElement("p");
+            priceElem.textContent = restaurant.price;
+            div.appendChild(priceElem);
+
+            let costPerformanceElem = document.createElement("p");
+            costPerformanceElem.textContent = restaurant.costPerformance;
+            div.appendChild(costPerformanceElem);
+            
             // data.txt에서 해당 restaurant의 데이터에 따라 태그 삽입 필요
-
             let list = document.querySelector("#muk-list")
             list.appendChild(div);
         }
         
-        // 페이지 전환 버튼 핸들러 함수
+        // 페이지 전환 버튼 
         const toggleButton = document.getElementById("toggleButton");
         toggleButton.addEventListener("click", togglePages);
 
+        // 페이지 전환 버튼 핸들러
         function togglePages() {
             const listPage = document.getElementById("listPage");
             const roulettePage = document.getElementById("roulettePage");
