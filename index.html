@@ -7,6 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- CSS 스타일 코드 작성-->
+    <style>
+        .restaurant-box {
+            border: 3px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            max-width: 400px;
+        }
+    
+        .data-box {
+            margin-top: 10px;
+        }
+    </style>
 
 </Head>
 
@@ -43,23 +55,23 @@
     <script>
         // 방향
         const direction = {
-            KwangwoonStreet: 1, // 광운로
-            RearGate: 2 // 후문
+            KwangwoonStreet: "광운로",
+            RearGate: "후문"
         }
 
         // 음식 종류 (메뉴의 대분류 태그)
         const foodType = {
-            Korean: 1, // 한식
-            KoreanChinese: 2, // 중화요리
-            Japanese: 3, // 일식
-            Vietnamese: 4, // 베트남요리
-            Western: 5, // 양식
-            Snack: 6, // 분식
-            QuickBite: 7, // 간편식(핫도그, 토스트 등)
-            Bread: 8, // 빵집
-            Desert: 9, // 디저트(아이스크림, 빙수 등)
-            Drink: 10, // 카페, 음료(쥬시 등)
-            ConvenStore: 11 // 편의점 분류
+            Korean: "한식",
+            KoreanChinese: "중화요리",
+            Japanese: "일식",
+            Vietnamese: "베트남요리",
+            Western: "양식",
+            Snack: "분식",
+            QuickBite: "간편식",
+            Bread: "빵집",
+            Desert:"디저트(아이스크림, 빙수 등)",
+            Drink: "카페, 음료(쥬시 등)",
+            ConvenStore: "편의점 분류"
         }
 
         // 메뉴 종류 (복수 포함 가능)
@@ -113,23 +125,42 @@
 
         // 가격 분류
         const price = {
-            efficency: 1, // 가성비 (제일 싼 메뉴 6000원 이하)
-            affordable: 2, // 저렴 (5000~6999)
-            average: 3, // 중간 (7000~9999)
-            over10k: 4, // 만원+
+            efficency: "가성비 (제일 싼 메뉴 6000원 이하)",
+            affordable: "저렴 (5000~6999)",
+            average: "중간 (7000~9999)",
+            over10k: "만원+"
         }
 
         let list = [];
 
-        function insertToList(restaurant) {
-            let div = document.createElement("div");
+        function addToList(restaurant, direction, foodtype, menutype, price) {
+            let list = document.querySelector("#muk-list");
 
-            // data.txt에서 해당 restaurant의 데이터에 따라 태그 삽입 필요
+            // 레스토랑용 새로운 div 엘리먼트 생성
+            let restaurantDiv = document.createElement("div");
+            restaurantDiv.classList.add("restaurant-box");
 
-            let list = document.querySelector("#muk-list")
-            list.appendChild(div);
+            // 데이터를 기반으로 엘리먼트 생성 및 추가
+            restaurantDiv.innerHTML = `
+            <h4>${restaurant}</h4>
+                <div class="data-box">
+                    <p>방향: ${direction}</p>
+                    <p>음식 종류: ${foodtype}</p>
+                    <p>메뉴 종류: ${menutype}</p>
+                    <p>가격: ${price}</p>
+                </div>
+            `;
+
+            // 새로운 레스토랑 div를 #muk-list 컨테이너에 추가
+            list.appendChild(restaurantDiv);
         }
+
+        //html 코드 작성을 위한 예시 2개
+        addToList("한끼철판", direction.KwangwoonStreet, foodType.Korean, menuType.jeyuk, price.average);
+        addToList("후문식당", direction.RearGate, foodType.Korean, menuType.ramen, price.average);
         
+
+
         // 페이지 전환 버튼 핸들러 함수
         const toggleButton = document.getElementById("toggleButton");
         toggleButton.addEventListener("click", togglePages);
@@ -156,6 +187,7 @@
 
     </script>
 </body>
+
 
 
 </html>
