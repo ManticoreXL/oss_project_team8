@@ -86,35 +86,36 @@
 
         function addToList(restaurant) {
             let div = document.createElement("div");
+            div.classList.add("restaurant-box");
             
             // restaurant의 각 데이터 키를 읽고 구를 만들어 삽입
             let nameElem = document.createElement("h3");
             nameElem.textContent = restaurant.name;
             div.appendChild(nameElem);
 
-            let locationElem = document.createElement("p");
+            let locationElem = document.createElement("data-box");
             locationElem.textContent = restaurant.location;
             div.appendChild(locationElem);
 
-            let distanceElem = document.createElement("p");
+            let distanceElem = document.createElement("data-box");
             distanceElem.textContent = restaurant.distance;
             div.appendChild(distanceElem);
 
-            let genreElem = document.createElement("p");
+            let genreElem = document.createElement("data-box");
             genreElem.textContent = restaurant.genre;
             div.appendChild(genreElem);
 
-            let foodTypeElem = document.createElement("p");
+            let foodTypeElem = document.createElement("data-box");
             foodTypeElem.textContent = restaurant.foodType;
             div.appendChild(foodTypeElem);
 
-            let priceElem = document.createElement("p");
+            let priceElem = document.createElement("data-box");
             priceElem.textContent = restaurant.price;
             div.appendChild(priceElem);
 
-            let costPerformanceElem = document.createElement("p");
+            let costPerformanceElem = document.createElement("data-box");
             costPerformanceElem.textContent = restaurant.costPerformance;
-            div.appendChild(costPerformanceElem);
+            div.appendChild(costPerformanceElem);    
             
             // data.txt에서 해당 restaurant의 데이터에 따라 태그 삽입 필요
             let list = document.querySelector("#muk-list")
