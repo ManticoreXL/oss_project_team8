@@ -83,11 +83,45 @@
 
     <!-- JS코드 작성 // 자료구조 및 룰렛 함수 -->
     <script>
-        
 
- 
+        function addToList(restaurant) {
+            let div = document.createElement("div");
+            
+            // restaurant의 각 데이터 키를 읽고 구를 만들어 삽입
+            let nameElem = document.createElement("h3");
+            nameElem.textContent = restaurant.name;
+            div.appendChild(nameElem);
+
+            let locationElem = document.createElement("p");
+            locationElem.textContent = restaurant.location;
+            div.appendChild(locationElem);
+
+            let distanceElem = document.createElement("p");
+            distanceElem.textContent = restaurant.distance;
+            div.appendChild(distanceElem);
+
+            let genreElem = document.createElement("p");
+            genreElem.textContent = restaurant.genre;
+            div.appendChild(genreElem);
+
+            let foodTypeElem = document.createElement("p");
+            foodTypeElem.textContent = restaurant.foodType;
+            div.appendChild(foodTypeElem);
+
+            let priceElem = document.createElement("p");
+            priceElem.textContent = restaurant.price;
+            div.appendChild(priceElem);
+
+            let costPerformanceElem = document.createElement("p");
+            costPerformanceElem.textContent = restaurant.costPerformance;
+            div.appendChild(costPerformanceElem);
+            
+            // data.txt에서 해당 restaurant의 데이터에 따라 태그 삽입 필요
+            let list = document.querySelector("#muk-list")
+            list.appendChild(div);
+        }
         
-        // 페이지 전환 버튼 핸들러 함수
+        // 페이지 전환 버튼 
         const toggleButton = document.getElementById("toggleButton");
         toggleButton.addEventListener("click", togglePages);
 
@@ -107,7 +141,7 @@
                 roulettePage.style.display = "flex";
             }
         }
-
+ 
         // 룰렛 함수 작성 필요
 
         // 사다리타기 함수 작성 필요
