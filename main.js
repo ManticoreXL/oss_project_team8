@@ -1,4 +1,4 @@
-import { readDataFromFile, parseData } from './parsing';
+import { readDataFromFile, parseData } from './parsing.js';
 
 // 데이터 파일 경로
 const filePath = 'data.txt';
