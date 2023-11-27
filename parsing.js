@@ -48,16 +48,7 @@ function parseData(data) {
     return stores;
 }
 
-// 데이터 파일 경로
-const filePath = 'data.txt';
-
-// 파일에서 데이터 읽기
-const rawData = readDataFromFile(filePath);
-
-if (rawData) {
-    // 데이터 파싱
-    const parsedData = parseData(rawData);
-
-    // 파싱된 데이터 출력
-    console.log(parsedData);
-}
+module.exports = {
+    readDataFromFile,
+    parseData
+};
