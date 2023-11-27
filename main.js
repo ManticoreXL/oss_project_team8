@@ -1,4 +1,4 @@
-const { readDataFromFile, parseData } = require('./parsing');
+import { readDataFromFile, parseData } from './parsing';
 
 // 데이터 파일 경로
 const filePath = 'data.txt';
@@ -10,7 +10,7 @@ if (rawData) {
     // 데이터 파싱
     const parsedData = parseData(rawData);
 
-    globalThis.parsedData = parsedData;
+    console.log(parsedData);
 }
 
 // 룰렛 함수 작성 필요

@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 // 파일을 읽어오는 함수
 function readDataFromFile(filePath) {
