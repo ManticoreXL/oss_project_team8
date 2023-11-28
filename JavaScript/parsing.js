@@ -1,7 +1,7 @@
-const fs = require('fs');
+import fs from 'fs';
 
 // 파일을 읽어오는 함수
-function readDataFromFile(filePath) {
+export function readDataFromFile(filePath) {
     try {
         const data = fs.readFileSync(filePath, 'utf8');
         return data;
@@ -12,7 +12,7 @@ function readDataFromFile(filePath) {
 }
 
 // 데이터를 가게 객체로 파싱하는 함수
-function parseData(data) {
+export function parseData(data) {
     const lines = data.split('\n');
     const stores = [];
 
@@ -46,18 +46,4 @@ function parseData(data) {
     });
 
     return stores;
-}
-
-// 데이터 파일 경로
-const filePath = 'data.txt';
-
-// 파일에서 데이터 읽기
-const rawData = readDataFromFile(filePath);
-
-if (rawData) {
-    // 데이터 파싱
-    const parsedData = parseData(rawData);
-
-    // 파싱된 데이터 출력
-    console.log(parsedData);
 }
