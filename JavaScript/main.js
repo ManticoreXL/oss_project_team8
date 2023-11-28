@@ -1,4 +1,5 @@
 import { readDataFromFile, parseData } from './parsing.js';
+import { classification } from './classification.js';
 
 // 데이터 파일 경로
 const filePath = 'data.txt';
@@ -12,6 +13,9 @@ if (rawData) {
 
     console.log(parsedData);
 }
+
+const tagedList = classification(rawData, "한식");
+console.log(tagedList);
 
 // 룰렛 함수 작성 필요
 
