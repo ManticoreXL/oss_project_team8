@@ -1,5 +1,5 @@
 // 태그를 포함하는 리스트 반환
-export function classification(restaurants, tag) {
+function classification(restaurants, tag) {
     let result = [];
 
     // 배열인지 확인
@@ -18,3 +18,5 @@ export function classification(restaurants, tag) {
     // 분류된 리스트 반환
     return result;
 }
+
+exports.classification = classification;

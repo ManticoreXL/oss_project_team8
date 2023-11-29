@@ -1,7 +1,7 @@
-import fs from 'fs';
+const fs = require('fs')
 
 // 파일을 읽어오는 함수
-export function readDataFromFile(filePath) {
+function readDataFromFile(filePath) {
     try {
         const data = fs.readFileSync(filePath, 'utf8');
         return data;
@@ -12,7 +12,7 @@ export function readDataFromFile(filePath) {
 }
 
 // 데이터를 가게 객체로 파싱하는 함수
-export function parseData(data) {
+function parseData(data) {
     const lines = data.split('\n');
     const stores = [];
 
@@ -47,3 +47,6 @@ export function parseData(data) {
 
     return stores;
 }
+
+exports.readDataFromFile = readDataFromFile;
+exports.parseData = parseData;

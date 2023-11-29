@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<Head>
+    <!-- 메타 데이터 작성 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS 스타일 코드 작성-->
+    <style>
+        /* 배경사진 삽입 (나중에 수정 )
+        body {
+            background-image: url('https://www.kw.ac.kr/KWData/webeditor/2020/2020_05_29_102245.jpg');
+            background-size: cover;
+            background-position: right;
+            background-attachment: fixed;
+            MARGIN: 0;
+        }
+        */
+
+        #toggleButton {
+            font-size: 16px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+
+        }
+
+        #muk-list h4 {
+            font-size: 25px;
+        }
+
+
+        .navbar {
+            font-size: 45px;
+            font-weight: bold;
+        }
+
+        .restaurant-box {
+            border: 3px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            max-width: 400px;
+        }
+
+        .data-box {
+            margin-top: 10px;
+        }
+    </style>
+
+</Head>
+
+<body>
+    <nav class="navbar">
+        <div>
+            광운대학교 먹리스트
+        </div>
+
+        <!-- 페이지 전환 버튼 -->
+        <button id="toggleButton">
+            페이지 전환
+        </button>
+    </nav>
+
+    <div id="listPage" class="d-flex">
+        <div class="flex-grow-1 rounded-2 me-1 p-2 w-50">
+            <h3>목록</h3>
+            <div id="muk-list">
+                <button type="button" class="btn btn-primary" onclick="showSortedRestaurants('distance')">거리순</button>
+                <button type="button" class="btn btn-primary" onclick="showSortedRestaurants('menu')">메뉴별</button>
+                <button type="button" class="btn btn-primary" onclick="showSortedRestaurants('price')">가격순</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="roulettePage" class="d-flex" style="display: none;">
+        <div class="flex-grow-1 rounded-2 me-1 p-2 w-50">
+            <h3>뽑기</h3>
+            <!-- 컨텐츠 추가 필요 -->
+        </div>
+    </div>
+
+    <div id="menuButtons" class="d-flex" style="display: none;">
+        <div class="flex-grow-1 rounded-2 me-1 p-2 w-50">
+            <h3>메뉴 선택</h3>
+            <div class="menu-buttons">
+                <button type="button" class="btn btn-primary" onclick="showSortedRestaurantsByMenu('한식')">한식</button>
+                <button type="button" class="btn btn-primary" onclick="showSortedRestaurantsByMenu('일식')">일식</button>
+                <button type="button" class="btn btn-primary" onclick="showSortedRestaurantsByMenu('중식')">중식</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS코드 작성 // 자료구조 및 룰렛 함수 -->
+    <!-- <script type="module" src="./JavaScript/main.js"></script> -->
+
+    <script>
+        // load 핸들러
+        window.addEventListener("load", () => {
+            fetch("/data", {method: "POST"})
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                data.forEach(d => {
+                    addToList(d);
+                });
+            });
+        });
+    </script>
+
+    <script>
+
+        function getSortedData(sortType) {
+            // 일단은 페이크 데이터 넣어둠
+            const sampleData = [
+                { name: "식당1", distance: 5, price: 20 },
+                { name: "식당2", distance: 10, price: 15 },
+                { name: "식당3", distance: 8, price: 25 }
+            ];
+
+            // 간단한 정렬 예시: 거리순, 메뉴별, 가격순
+            if (sortType === 'distance') {
+                return sampleData.sort((a, b) => a.distance - b.distance);
+            } else if (sortType === 'price') {
+                return sampleData.sort((a, b) => a.price - b.price);
+            }
+
+            return sampleData;
+        }
+
+        function displaySortedRestaurants(sortedRestaurants) {
+            const sortedContainer = document.getElementById("sortedRestaurantContainer");
+            // 기존에 있던 목록 삭제
+            sortedContainer.innerHTML = "";
+
+            // 정렬된 식당 리스트를 화면에 추가
+            sortedRestaurants.forEach(restaurant => {
+                addToList(restaurant, sortedContainer);
+            });
+        }
+
+        function showSortedRestaurants(sortType) {
+            // 여기에 각 정렬에 따른 데이터를 불러오고 화면에 보여주는 코드 추가
+
+            // 예시로 데이터를 샘플로 만들어봅니다.
+            const sortedRestaurants = getSortedData(sortType);
+
+            // 기존에 있던 목록 삭제
+            const listContainer = document.getElementById("muk-list");
+            listContainer.innerHTML = "";
+
+            // 정렬된 식당 리스트를 화면에 추가
+            sortedRestaurants.forEach(restaurant => {
+                addToList(restaurant, listContainer);
+            });
+        }
+
+
+        function addToList(restaurant) {
+            let div = document.createElement("div");
+            div.classList.add("restaurant-box");
+
+            // restaurant의 각 데이터 키를 읽고 구를 만들어 삽입
+            let nameElem = document.createElement("h3");
+            nameElem.textContent = restaurant.name;
+            div.appendChild(nameElem);
+
+            let locationElem = document.createElement("data-box");
+            locationElem.textContent = restaurant.location;
+            div.appendChild(locationElem);
+
+            let distanceElem = document.createElement("data-box");
+            distanceElem.textContent = restaurant.distance;
+            div.appendChild(distanceElem);
+
+            let genreElem = document.createElement("data-box");
+            genreElem.textContent = restaurant.genre;
+            div.appendChild(genreElem);
+
+            let foodTypeElem = document.createElement("data-box");
+            foodTypeElem.textContent = restaurant.foodType;
+            div.appendChild(foodTypeElem);
+
+            let priceElem = document.createElement("data-box");
+            priceElem.textContent = restaurant.price;
+            div.appendChild(priceElem);
+
+            let costPerformanceElem = document.createElement("data-box");
+            costPerformanceElem.textContent = restaurant.costPerformance;
+            div.appendChild(costPerformanceElem);
+
+            // data.txt에서 해당 restaurant의 데이터에 따라 태그 삽입 필요
+            let list = document.querySelector("#muk-list")
+            list.appendChild(div);
+        }
+
+        // 페이지 전환 버튼 
+        const toggleButton = document.getElementById("toggleButton");
+        toggleButton.addEventListener("click", togglePages);
+
+        // 페이지 전환 버튼 핸들러
+        function togglePages() {
+            const listPage = document.getElementById("listPage");
+            const sortedListPage = document.getElementById("sortedListPage");
+            const roulettePage = document.getElementById("roulettePage");
+
+            if (listPage.style.display === "none") {
+                // 리스트 페이지로 변경
+                listPage.style.display = "flex";
+
+                roulettePage.style.display = "none";
+            } else {
+                // 룰렛 페이지로 변경
+                listPage.style.display = "none";
+
+                roulettePage.style.display = "flex";
+            }
+        }
+    </script>
+</body>
+
+
+
+</html>
