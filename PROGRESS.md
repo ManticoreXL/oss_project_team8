@@ -36,7 +36,7 @@
 - CSS - 버튼 스타일링 [(Commit Link)](https://github.com/ManticoreXL/oss_project_team8/commit/c5e0b1db76148018f68b33cfa9cf630179f57033)
 
 ### 최민석
-- JS+HTML 레이아웃 설정, 페이지 전환 버튼 [(Commit Link)]https://github.com/ManticoreXL/oss_project_team8/commit/020b78939fdcfc623c25fc03f5a536be72dcf16c
+- JS+HTML 레이아웃 설정, 페이지 전환 버튼 [(Commit Link)](https://github.com/ManticoreXL/oss_project_team8/commit/020b78939fdcfc623c25fc03f5a536be72dcf16c)
 - insertToList함수에서 각 element별 div 동적 생성 및 append [(Commit Link)](https://github.com/ManticoreXL/oss_project_team8/commit/1c7f782bf070598ab7674e605835f681317db195)
 - 데이터를 특정 태그만 포함하는 리스트만 분류 [(Commit Link)](https://github.com/ManticoreXL/oss_project_team8/commit/aaca5a57fba4460e0103540feab29c654755eba9)
 - JS http 서버 + data.txt 서버에서 전처리화 + 로드 시 데이터 리스트 리퀘스트 [(Commit Link)](https://github.com/ManticoreXL/oss_project_team8/commit/649f4c191cf833878063c626386eecf7038c768e)
