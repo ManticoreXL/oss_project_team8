@@ -29,11 +29,11 @@
 ## Individual Progress Status
 ### 강현민
 - HTML - 입력 받은 데이터에 따라 div 동적 생성 및 삽입 [(Commit Link)](https://github.com/ManticoreXL/oss_project_team8/commit/8eef19066bb16ffc267c854d417cc619bb53b503)
-- CSS - 테스트를 위한 심플 CSS 스타일링 [(Commit Link)](https://github.com/ManticoreXL/oss_project_team8/commit/07ed9d87e5a9936c73b98615cee01d9c0b29430c)
+- CSS - 테스트를 위한 리스트 아이템 심플 CSS 스타일링 [(Commit Link)](https://github.com/ManticoreXL/oss_project_team8/commit/07ed9d87e5a9936c73b98615cee01d9c0b29430c)
 
 ### 유건호
 - HTML - navbar에 정렬, 분류 버튼 + 핸들러 함수 구현 [(Commit Link)](https://github.com/ManticoreXL/oss_project_team8/commit/eae50955bbfd1b541aa31c9d01f863a929d2f022)
-- CSS - 버튼 스타일링 [(Commit Link)](https://github.com/ManticoreXL/oss_project_team8/commit/c5e0b1db76148018f68b33cfa9cf630179f57033)
+- CSS - 버튼 스타일링 (분류 * 3, 정렬) [(Commit Link)](https://github.com/ManticoreXL/oss_project_team8/commit/c5e0b1db76148018f68b33cfa9cf630179f57033)
 
 ### 최민석
 - JS+HTML 레이아웃 설정, 페이지 전환 버튼 [(Commit Link)](https://github.com/ManticoreXL/oss_project_team8/commit/020b78939fdcfc623c25fc03f5a536be72dcf16c)
@@ -42,6 +42,6 @@
 - JS http 서버 + data.txt 서버에서 전처리화 + 로드 시 데이터 리스트 리퀘스트 [(Commit Link)](https://github.com/ManticoreXL/oss_project_team8/commit/649f4c191cf833878063c626386eecf7038c768e)
 
 ### 홍왕기
-- 광운대학교 주변 식당 자료조사 [(Commit Link)](https://github.com/ManticoreXL/oss_project_team8/commit/0595ddd2a2236ab989ff07cbe823af49271388b6)
+- 광운대학교 주변 식당 자료조사 (raw data 수집) [(Commit Link)](https://github.com/ManticoreXL/oss_project_team8/commit/0595ddd2a2236ab989ff07cbe823af49271388b6)
 - data.txt 작성 + 데이터 구문분석 및 리스트화 구현 [(Commit Link)](https://github.com/ManticoreXL/oss_project_team8/commit/0595ddd2a2236ab989ff07cbe823af49271388b6)
 - 데이터를 가격을 키값으로 오름차순, 내림차순 정렬 구현 [(Commit Link)](https://github.com/ManticoreXL/oss_project_team8/commit/1062e5f3a135973a50efba73587ede86e2aac270)
