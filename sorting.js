@@ -43,10 +43,10 @@ function sortData(restaurants, type, order) {
 
 exports.sortData = sortData;
 
-// 디버그 섹션
-const filePath = "data.txt";
-const rawData = ps.readDataFromFile(filePath);
-const parsedData = ps.parseData(rawData);
+// // 디버그 섹션
+// const filePath = "data.txt";
+// const rawData = ps.readDataFromFile(filePath);
+// const parsedData = ps.parseData(rawData);
 
-const sortedData = sortData(parsedData, "price", 0);
-console.log(sortedData);
+// const sortedData = sortData(parsedData, "price", 0);
+// console.log(sortedData);

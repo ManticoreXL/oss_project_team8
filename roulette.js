@@ -3,8 +3,10 @@ function roulette(restaurants) {
     return restaurants[randomIndex];
 }
 
-// 룰렛 함수를 호출하여 선택된 식당을 얻습니다.
-const selectedRestaurant = roulette(restaurants);
+exports.roulette = roulette;
 
-// 선택된 식당을 출력합니다.
-console.log("Selected Restaurant:", selectedRestaurant);
+// // 룰렛 함수를 호출하여 선택된 식당을 얻습니다.
+// const selectedRestaurant = roulette(restaurants);
+
+// // 선택된 식당을 출력합니다.
+// console.log("Selected Restaurant:", selectedRestaurant);

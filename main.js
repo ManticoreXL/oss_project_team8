@@ -1,6 +1,7 @@
 const ps = require("./parsing");
 const cf = require("./classification");
 const st = require("./sorting");
+const rt = require("./roulette");
 
 const express = require('express');
 const app = express();
@@ -28,12 +29,13 @@ const sortedList_dist_D = st.sortData(parsedData, "distance", 1);
 const sortedList_price_A = st.sortData(parsedData, "price", 0);
 const sortedList_price_D = st.sortData(parsedData, "price", 1);
 
-// 데이터 요청
-app.post('/data', (req, res) => {
-    res.send(parsedData);
-});
 
-// 서버 구동 표시
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
-});
+// // 데이터 요청
+// app.post('/data', (req, res) => {
+//     res.send(parsedData);
+// });
+
+// // 서버 구동 표시
+// app.listen(port, () => {
+//     console.log(`Example app listening on port ${port}`);
+// });
