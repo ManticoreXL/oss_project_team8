@@ -166,6 +166,10 @@
             sortedRestaurants.forEach(restaurant => {
                 addToList(restaurant, listContainer);
             });
+
+            // 현재 상태를 히스토리에 추가
+            window.history.pushState({ page: "listPage" }, null, "");
+
         }
 
 
@@ -221,14 +225,21 @@
                 // 리스트 페이지로 변경
                 listPage.style.display = "flex";
                 roulettePage.style.display = "none";
+
+                // 현재 상태를 히스토리에 추가
+                history.pushState({ page: "listPage" }, null, "");
             } else {
                 // 룰렛 페이지로 변경
                 listPage.style.display = "none";
                 roulettePage.style.display = "flex";
+
+                // 현재 상태를 히스토리에 추가
+                history.pushState({ page: "listPage" }, null, "");
             }
         }
         //뒤로가기 버튼 함수
-        function goBack(){
+        function goBack() {
+            // 현재 상태를 히스토리에서 제거
             window.history.go(-1);
         }
     </script>
