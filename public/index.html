@@ -21,7 +21,7 @@
         #toggleButton {
             font-size: 16px;
             padding: 10px 20px;
-            background-color: #3498db;
+            background-color: #8A1601;
             color: #fff;
             border-radius: 5px;
             cursor: pointer;
@@ -48,6 +48,15 @@
         .data-box {
             margin-top: 10px;
         }
+
+        #sortButton{
+            font-size: 15px;
+            padding: 10px 20px;
+            background-color: #a18484;
+            color: #fff;
+            border-radius : 5px;
+            cursor: pointer;
+        }
     </style>
 
 </Head>
@@ -64,13 +73,17 @@
         </button>
     </nav>
 
+    <button onclick="goBack()">뒤로가기</button>
+
+
+
     <div id="listPage" class="d-flex">
         <div class="flex-grow-1 rounded-2 me-1 p-2 w-50">
             <h3>목록</h3>
             <div id="muk-list">
-                <button type="button" class="btn btn-primary" onclick="showSortedRestaurants('distance')">거리순</button>
-                <button type="button" class="btn btn-primary" onclick="showSortedRestaurants('menu')">메뉴별</button>
-                <button type="button" class="btn btn-primary" onclick="showSortedRestaurants('price')">가격순</button>
+                <button type="button" id="sortButton" class="btn btn-primary" onclick="showSortedRestaurants('distance')">거리순</button>
+                <button type="button" id="sortButton" class="btn btn-primary" onclick="showSortedRestaurants('menu')">메뉴별</button>
+                <button type="button" id="sortButton" class="btn btn-primary" onclick="showSortedRestaurants('price')">가격순</button>
             </div>
         </div>
     </div>
@@ -140,6 +153,7 @@
 
         function showSortedRestaurants(sortType) {
             // 여기에 각 정렬에 따른 데이터를 불러오고 화면에 보여주는 코드 추가
+
 
             // 예시로 데이터를 샘플로 만들어봅니다.
             const sortedRestaurants = getSortedData(sortType);
@@ -212,6 +226,10 @@
                 listPage.style.display = "none";
                 roulettePage.style.display = "flex";
             }
+        }
+        //뒤로가기 버튼 함수
+        function goBack(){
+            window.history.go(-1);
         }
     </script>
 </body>
