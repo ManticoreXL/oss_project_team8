@@ -47,6 +47,5 @@ exports.sortData = sortData;
 // const filePath = "data.txt";
 // const rawData = ps.readDataFromFile(filePath);
 // const parsedData = ps.parseData(rawData);
-
 // const sortedData = sortData(parsedData, "name", 0);
-// console.log(sortedData);
+// // console.log(sortedData);

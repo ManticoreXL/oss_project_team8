@@ -52,6 +52,14 @@ function parseData(data) {
     return stores;
 }
 
+// // 디버그 섹션
+// const filePath = 'data.txt';
+// const rawData = readDataFromFile(filePath);
+// let parsedData;
+// if (rawData)
+//     parsedData = parseData(rawData);
+// console.log(parsedData);
+
 exports.readDataFromFile = readDataFromFile;
 exports.parseData = parseData;
 
