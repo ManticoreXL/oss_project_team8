@@ -25,7 +25,6 @@
             color: #fff;
             border-radius: 5px;
             cursor: pointer;
-
         }
 
         #muk-list h4 {
@@ -48,6 +47,7 @@
         .data-box {
             margin-top: 10px;
         }
+
     </style>
 
 </Head>
@@ -59,18 +59,24 @@
         </div>
 
         <!-- 페이지 전환 버튼 -->
-        <button id="toggleButton">
-            페이지 전환
-        </button>
+        <button id="toggleButton">페이지 전환</button>
+
+        <button id="dSortA_Button">거리순↑</button>
+        <button id="dSortD_Button">거리순↓</button>
+        <button id="pSortA_Button">가격순↑</button>
+        <button id="pSortD_Button">가격순↓</button>
+
+        <button id="tagKR_Button">한식만 표시</button>
+        <button id="tagJP_Button">일식만 표시</button>
+        <button id="tagCN_Button">중식만 표시</button>
+        <button id="tagWS_Button">양식만 표시</button>
     </nav>
 
     <div id="listPage" class="d-flex">
         <div class="flex-grow-1 rounded-2 me-1 p-2 w-50">
             <h3>목록</h3>
-            <div id="muk-list">
-                <button type="button" class="btn btn-primary" onclick="showSortedRestaurants('distance')">거리순</button>
-                <button type="button" class="btn btn-primary" onclick="showSortedRestaurants('menu')">메뉴별</button>
-                <button type="button" class="btn btn-primary" onclick="showSortedRestaurants('price')">가격순</button>
+            <div id="muklist">
+
             </div>
         </div>
     </div>
@@ -82,7 +88,7 @@
         </div>
     </div>
 
-    <div id="menuButtons" class="d-flex" style="display: none;">
+    <!-- <div id="menuButtons" class="d-flex" style="display: none;">
         <div class="flex-grow-1 rounded-2 me-1 p-2 w-50">
             <h3>메뉴 선택</h3>
             <div class="menu-buttons">
@@ -91,10 +97,7 @@
                 <button type="button" class="btn btn-primary" onclick="showSortedRestaurantsByMenu('중식')">중식</button>
             </div>
         </div>
-    </div>
-
-    <!-- JS코드 작성 // 자료구조 및 룰렛 함수 -->
-    <!-- <script type="module" src="./JavaScript/main.js"></script> -->
+    </div> -->
 
     <script>
         // load 핸들러
@@ -109,52 +112,120 @@
             });
         });
 
-        function getSortedData(sortType) {
-            // 일단은 페이크 데이터 넣어둠
-            const sampleData = [
-                { name: "식당1", distance: 5, price: 20 },
-                { name: "식당2", distance: 10, price: 15 },
-                { name: "식당3", distance: 8, price: 25 }
-            ];
+        // 거리순 정렬 버튼 핸들러 (오름차순)
+        const dSortA_Button = document.getElementById("dSortA_Button");
+        dSortA_Button.addEventListener("click", () => {
+            fetch("/dSortA", {method: "POST"})
+            .then((res) => res.json())
+            .then((data) => {
+                // console.log(data);
+                const list = document.querySelector("#muklist");
+                list.innerHTML ="";
+                data.forEach(d => {
+                    addToList(d);
+                });
+            })
+        });
 
-            // 간단한 정렬 예시: 거리순, 메뉴별, 가격순
-            if (sortType === 'distance') {
-                return sampleData.sort((a, b) => a.distance - b.distance);
-            } else if (sortType === 'price') {
-                return sampleData.sort((a, b) => a.price - b.price);
-            }
+        // 거리순 정렬 버튼 핸들러 (내림차순)
+        const dSortD_Button = document.getElementById("dSortD_Button");
+        dSortD_Button.addEventListener("click", () => {
+            fetch("/dSortD", {method: "POST"})
+            .then((res) => res.json())
+            .then((data) => {
+                const list = document.querySelector("#muklist");
+                list.innerHTML ="";
+                data.forEach(d => {
+                    addToList(d);
+                });
+            })
+        });
 
-            return sampleData;
-        }
+        // 가격순 정렬 버튼 핸들러 (오름차순)
+        const pSortA_Button = document.getElementById("pSortA_Button");
+        pSortA_Button.addEventListener("click", () => {
+            fetch("/pSortA", {method: "POST"})
+            .then((res) => res.json())
+            .then((data) => {
+                const list = document.querySelector("#muklist");
+                list.innerHTML ="";
+                data.forEach(d => {
+                    addToList(d);
+                });
+            })
+        });
 
-        function displaySortedRestaurants(sortedRestaurants) {
-            const sortedContainer = document.getElementById("sortedRestaurantContainer");
-            // 기존에 있던 목록 삭제
-            sortedContainer.innerHTML = "";
+        // 가격순 정렬 버튼 핸들러 (내림차순)
+        const pSortD_Button = document.getElementById("pSortD_Button");
+        pSortD_Button.addEventListener("click", () => {
+            fetch("/pSortD", {method: "POST"})
+            .then((res) => res.json())
+            .then((data) => {
+                const list = document.querySelector("#muklist");
+                list.innerHTML = "";
+                data.forEach(d => {
+                    addToList(d);
+                });
+            })
+        });
 
-            // 정렬된 식당 리스트를 화면에 추가
-            sortedRestaurants.forEach(restaurant => {
-                addToList(restaurant, sortedContainer);
-            });
-        }
+        // 메뉴별 분류 버튼 핸들러 (한식)
+        const tagKR_Button = document.getElementById("tagKR_Button");
+        tagKR_Button.addEventListener("click", () => {
+            fetch("/tagKR", {method: "POST"})
+            .then((res) => res.json())
+            .then((data) => {
+                const list = document.querySelector("#muklist");
+                list.innerHTML = "";
+                data.forEach(d => {
+                    addToList(d);
+                });
+            })
+        });
 
-        function showSortedRestaurants(sortType) {
-            // 여기에 각 정렬에 따른 데이터를 불러오고 화면에 보여주는 코드 추가
+        // 메뉴별 분류 버튼 핸들러 (일식)
+        const tagJP_Button = document.getElementById("tagJP_Button");
+        tagJP_Button.addEventListener("click", () => {
+            fetch("/tagJP", {method: "POST"})
+            .then((res) => res.json())
+            .then((data) => {
+                const list = document.querySelector("#muklist");
+                list.innerHTML = "";
+                data.forEach(d => {
+                    addToList(d);
+                });
+            })
+        });
 
-            // 예시로 데이터를 샘플로 만들어봅니다.
-            const sortedRestaurants = getSortedData(sortType);
+        // 메뉴별 분류 버튼 핸들러 (중식)
+        const tagCN_Button = document.getElementById("tagCN_Button");
+        tagCN_Button.addEventListener("click", () => {
+            fetch("/tagCN", {method: "POST"})
+            .then((res) => res.json())
+            .then((data) => {
+                const list = document.querySelector("#muklist");
+                list.innerHTML = "";
+                data.forEach(d => {
+                    addToList(d);
+                });
+            })
+        });
 
-            // 기존에 있던 목록 삭제
-            const listContainer = document.getElementById("muk-list");
-            listContainer.innerHTML = "";
+        // 메뉴별 분류 버튼 핸들러 (양식)
+        const tagWS_Button = document.getElementById("tagWS_Button");
+        tagWS_Button.addEventListener("click", () => {
+            fetch("/tagWS", {method: "POST"})
+            .then((res) => res.json())
+            .then((data) => {
+                const list = document.querySelector("#muklist");
+                list.innerHTML = "";
+                data.forEach(d => {
+                    addToList(d);
+                });
+            })
+        });
 
-            // 정렬된 식당 리스트를 화면에 추가
-            sortedRestaurants.forEach(restaurant => {
-                addToList(restaurant, listContainer);
-            });
-        }
-
-
+        // muklist에 데이터 추가
         function addToList(restaurant) {
             let div = document.createElement("div");
             div.classList.add("restaurant-box");
@@ -189,29 +260,53 @@
             div.appendChild(costPerformanceElem);
 
             // data.txt에서 해당 restaurant의 데이터에 따라 태그 삽입 필요
-            let list = document.querySelector("#muk-list")
+            let list = document.querySelector("#muklist")
             list.appendChild(div);
-        }
+        }    
 
-        // 페이지 전환 버튼 
+        // 리스트-룰렛 페이지 전환 버튼 
         const toggleButton = document.getElementById("toggleButton");
         toggleButton.addEventListener("click", togglePages);
 
-        // 페이지 전환 버튼 핸들러
+        // 리스트-룰렛 페이지 전환 버튼 핸들러
         function togglePages() {
+            // document item 로딩
             const listPage = document.getElementById("listPage");
             const sortedListPage = document.getElementById("sortedListPage");
             const roulettePage = document.getElementById("roulettePage");
+            const dSortButtonA = document.getElementById("dSortButtonA");
+            const dSortButtonD = document.getElementById("dSortButtonD");
+            const pSortButtonA = document.getElementById("pSortButtonA");
+            const pSortButtonD = document.getElementById("pSortButtonD");
+            const tagButtonKR = document.getElementById("tagButtonKR");
+            const tagButtonJP = document.getElementById("tagButtonJP");
+            const tagButtonCN = document.getElementById("tagButtonCN");
 
+            // 리스트-룰렛 토글
             if (listPage.style.display === "none") {
                 // 리스트 페이지로 변경
                 listPage.style.display = "flex";
                 roulettePage.style.display = "none";
+                dSortButtonA.style.display = "flex";
+                dSortButtonD.style.display = "flex";
+                pSortButtonA.style.display = "flex";
+                pSortButtonD.style.display = "flex";
+                tagButtonKR.style.display = "flex";
+                tagButtonJP.style.display = "flex";
+                tagButtonCN.style.display = "flex";
             } else {
                 // 룰렛 페이지로 변경
                 listPage.style.display = "none";
                 roulettePage.style.display = "flex";
+                dSortButtonA.style.display = "none";
+                dSortButtonD.style.display = "none";
+                pSortButtonA.style.display = "none";
+                pSortButtonD.style.display = "none";
+                tagButtonKR.style.display = "none";
+                tagButtonJP.style.display = "none";
+                tagButtonCN.style.display = "none";
             }
         }
+
     </script>
 </body>

@@ -19,23 +19,60 @@ if (rawData)
     parsedData = ps.parseData(rawData);
 
 // 메뉴로 분류한 리스트 셋업
-const tagedList_KR = cf.classification(parsedData, "한식");
-const tagedList_JP = cf.classification(parsedData, "일식");
-const tagedList_CN = cf.classification(parsedData, "중식");
+let tagedList_KR = cf.classification(parsedData, "한식");
+let tagedList_JP = cf.classification(parsedData, "일식");
+let tagedList_CN = cf.classification(parsedData, "중식");
+let tagedList_WS = cf.classification(parsedData, "양식");
 
 // 거리, 가격으로 정렬한 리스트 셋업
-const sortedList_dist_A = st.sortData(parsedData, "distance", 0);
-const sortedList_dist_D = st.sortData(parsedData, "distance", 1);
-const sortedList_price_A = st.sortData(parsedData, "price", 0);
-const sortedList_price_D = st.sortData(parsedData, "price", 1);
+let sortedList_dist_A = st.sortData(parsedData, "distance", 0);
+let sortedList_dist_D = st.sortData(parsedData, "distance", 1);
+let sortedList_price_A = st.sortData(parsedData, "price", 0);
+let sortedList_price_D = st.sortData(parsedData, "price", 1);
 
+// 기본값 데이터 전송
+app.post('/data', (req, res) => {
+    res.send(parsedData);
+});
 
-// // 데이터 요청
-// app.post('/data', (req, res) => {
-//     res.send(parsedData);
-// });
+// 메뉴별 데이터 전송
+app.post('/tagKR', (req, res) => {
+    res.send(tagedList_KR);
+});
 
-// // 서버 구동 표시
-// app.listen(port, () => {
-//     console.log(`Example app listening on port ${port}`);
-// });
+app.post('/tagJP', (req, res) => {
+    res.send(tagedList_JP);
+});
+
+app.post('/tagCN', (req, res) => {
+    res.send(tagedList_CN);
+});
+
+app.post('/tagWS', (req, res) => {
+    res.send(tagedList_WS);
+});
+
+// 거리순 정렬 데이터 요청 (오름차순)
+app.post('/dSortA', (req, res) => {
+    res.send(sortedList_dist_A);
+});
+
+// 거리순 정렬 데이터 요청 (내림차순)
+app.post('/dSortD', (req, res) => {
+    res.send(sortedList_dist_D);
+});
+
+// 가격순 정렬 데이터 요청 (오름차순)
+app.post('/pSortA', (req, res) => {
+    res.send(sortedList_price_A);
+});
+
+// 가격순 정렬 데이터 요청 (내림차순)
+app.post('/pSortD', (req, res) => {
+    res.send(sortedList_price_D);
+});
+
+// 서버 구동 표시
+app.listen(port, () => {
+    console.log(`KW-MukList app listening on port ${port}`);
+});
