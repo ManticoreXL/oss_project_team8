@@ -45,8 +45,20 @@ function parseData(data) {
         stores.push(store);
     });
 
+    // 정렬 후 반환
+    const collator = new Intl.Collator("ko", {sensitivity: "base"});
+    stores.sort((a, b) => collator.compare(a.name, b.name));
+
     return stores;
 }
+
+// // 디버그 섹션
+// const filePath = 'data.txt';
+// const rawData = readDataFromFile(filePath);
+// let parsedData;
+// if (rawData)
+//     parsedData = parseData(rawData);
+// console.log(parsedData);
 
 exports.readDataFromFile = readDataFromFile;
 exports.parseData = parseData;
