@@ -30,7 +30,7 @@
 - 최민석(2020202090): 작업 조율, Web 설계, 자료구조 설계
 - 강현민(2020202092): HTML Document 설계, CSS 스타일링
 - 유건호(2022202005): CSS 스타일링, Web 구조 설계
-- 홍왕기(2020202090): Web 설계, 자료구조 설계
+- 홍왕기(2020202060): Web 설계, 자료구조 설계
 
 ## Required Technologies
 - JavaScript+HTML+CSS
