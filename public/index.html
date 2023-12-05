@@ -274,37 +274,41 @@
             const listPage = document.getElementById("listPage");
             const sortedListPage = document.getElementById("sortedListPage");
             const roulettePage = document.getElementById("roulettePage");
-            const dSortButtonA = document.getElementById("dSortButtonA");
-            const dSortButtonD = document.getElementById("dSortButtonD");
-            const pSortButtonA = document.getElementById("pSortButtonA");
-            const pSortButtonD = document.getElementById("pSortButtonD");
-            const tagButtonKR = document.getElementById("tagButtonKR");
-            const tagButtonJP = document.getElementById("tagButtonJP");
-            const tagButtonCN = document.getElementById("tagButtonCN");
+            const dSortA_Button = document.getElementById("dSortA_Button");
+            const dSortD_Button = document.getElementById("dSortD_Button");
+            const pSortA_Button = document.getElementById("pSortA_Button");
+            const pSortD_Button = document.getElementById("pSortD_Button");
+            const tagKR_Button = document.getElementById("tagKR_Button");
+            const tagJP_Button = document.getElementById("tagJP_Button");
+            const tagCN_Button = document.getElementById("tagCN_Button");
+            const tagWS_Button = document.getElementById("tagWS_Button");
 
             // 리스트-룰렛 토글
             if (listPage.style.display === "none") {
                 // 리스트 페이지로 변경
                 listPage.style.display = "flex";
                 roulettePage.style.display = "none";
-                dSortButtonA.style.display = "flex";
-                dSortButtonD.style.display = "flex";
-                pSortButtonA.style.display = "flex";
-                pSortButtonD.style.display = "flex";
-                tagButtonKR.style.display = "flex";
-                tagButtonJP.style.display = "flex";
-                tagButtonCN.style.display = "flex";
+                dSortA_Button.style.display = "flex";
+                dSortD_Button.style.display = "flex";
+                pSortA_Button.style.display = "flex";
+                pSortD_Button.style.display = "flex";
+                tagKR_Button.style.display = "flex";
+                tagJP_Button.style.display = "flex";
+                tagCN_Button.style.display = "flex";
+                tagWS_Button.style.display = "flex";
+
             } else {
                 // 룰렛 페이지로 변경
                 listPage.style.display = "none";
                 roulettePage.style.display = "flex";
-                dSortButtonA.style.display = "none";
-                dSortButtonD.style.display = "none";
-                pSortButtonA.style.display = "none";
-                pSortButtonD.style.display = "none";
-                tagButtonKR.style.display = "none";
-                tagButtonJP.style.display = "none";
-                tagButtonCN.style.display = "none";
+                dSortA_Button.style.display = "none";
+                dSortD_Button.style.display = "none";
+                pSortA_Button.style.display = "none";
+                pSortD_Button.style.display = "none";
+                tagKR_Button.style.display = "none";
+                tagJP_Button.style.display = "none";
+                tagCN_Button.style.display = "none";
+                tagWS_Button.style.display = "none";
             }
         }
 
