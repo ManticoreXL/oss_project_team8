@@ -8,24 +8,27 @@
 
     <!-- CSS 스타일 코드 작성-->
     <style>
-        /* 배경사진 삽입 (나중에 수정 )
-        body {
-            background-image: url('https://www.kw.ac.kr/KWData/webeditor/2020/2020_05_29_102245.jpg');
-            background-size: cover;
-            background-position: right;
-            background-attachment: fixed;
-            MARGIN: 0;
-        }
-        */
 
         #toggleButton {
-            font-size: 16px;
-            padding: 10px 20px;
-            background-color: #8A1601;
-            color: #fff;
-            border-radius: 5px;
+            font-size: 1.2rem;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
             cursor: pointer;
+            background-color: #e74c3c;
+            color: #fff;
+            transition: background-color 0.3s ease;
+        }
 
+
+        #toggleButton:hover {
+            background-color: #c0392b;
+        }
+
+
+        #toggleButton:active {
+            background-color: #922b21;
         }
 
         #muk-list h4 {
@@ -49,14 +52,100 @@
             margin-top: 10px;
         }
 
-        #sortButton{
-            font-size: 15px;
-            padding: 10px 20px;
-            background-color: #a18484;
-            color: #fff;
-            border-radius : 5px;
-            cursor: pointer;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
         }
+
+        /* 제목 스타일링 */
+        .navbar {
+            background-color: #3498db;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        /* navbar에 사진 삽입 */
+        .navbar::before,
+        .navbar::after {
+            content: '';
+            display: inline-block;
+            height: 170px;
+            width: 170px;
+            background-size: cover;
+            margin: 0 10px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* 왼쪽 우니 */
+        .navbar::before {
+            left: 0;
+            background-image: url('images/wooni1.png');
+            top: 40%;
+        }
+
+        /* 오른쪽 우니 */
+        .navbar::after {
+            right: 0;
+            background-image: url('images/wooni2.png');
+            top: 38%;
+        }
+
+        /* 버튼 스타일링 */
+        button {
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #ff9a9a;
+            color: #000000;
+        }
+
+        /* 페이지 스타일링 */
+        #listPage, #roulettePage {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        /* Restaurant Box Styles */
+        .restaurant-box {
+            border: 3px solid #ccc;
+            padding: 15px;
+            margin-bottom: 15px;
+            max-width: 400px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 데이터박스 스타일링 */
+        .data-box {
+            margin-top: 10px;
+        }
+
+        
+
+        .restaurant-box {
+            max-width: 100%;
+        }
+
+        
+
     </style>
 
 </Head>
@@ -68,22 +157,24 @@
         </div>
 
         <!-- 페이지 전환 버튼 -->
-        <button id="toggleButton">
-            페이지 전환
-        </button>
+        <button id="toggleButton">페이지 전환</button>
+
+        <button id="dSortA_Button">거리순↑</button>
+        <button id="dSortD_Button">거리순↓</button>
+        <button id="pSortA_Button">가격순↑</button>
+        <button id="pSortD_Button">가격순↓</button>
+
+        <button id="tagKR_Button">한식만 표시</button>
+        <button id="tagJP_Button">일식만 표시</button>
+        <button id="tagCN_Button">중식만 표시</button>
+        <button id="tagWS_Button">양식만 표시</button>
     </nav>
-
-    <button onclick="goBack()">뒤로가기</button>
-
-
 
     <div id="listPage" class="d-flex">
         <div class="flex-grow-1 rounded-2 me-1 p-2 w-50">
             <h3>목록</h3>
-            <div id="muk-list">
-                <button type="button" id="sortButton" class="btn btn-primary" onclick="showSortedRestaurants('distance')">거리순</button>
-                <button type="button" id="sortButton" class="btn btn-primary" onclick="showSortedRestaurants('menu')">메뉴별</button>
-                <button type="button" id="sortButton" class="btn btn-primary" onclick="showSortedRestaurants('price')">가격순</button>
+            <div id="muklist">
+
             </div>
         </div>
     </div>
@@ -95,7 +186,7 @@
         </div>
     </div>
 
-    <div id="menuButtons" class="d-flex" style="display: none;">
+    <!-- <div id="menuButtons" class="d-flex" style="display: none;">
         <div class="flex-grow-1 rounded-2 me-1 p-2 w-50">
             <h3>메뉴 선택</h3>
             <div class="menu-buttons">
@@ -104,10 +195,7 @@
                 <button type="button" class="btn btn-primary" onclick="showSortedRestaurantsByMenu('중식')">중식</button>
             </div>
         </div>
-    </div>
-
-    <!-- JS코드 작성 // 자료구조 및 룰렛 함수 -->
-    <!-- <script type="module" src="./JavaScript/main.js"></script> -->
+    </div> -->
 
     <script>
         // load 핸들러
@@ -122,53 +210,120 @@
             });
         });
 
-        function getSortedData(sortType) {
-            // 일단은 페이크 데이터 넣어둠
-            const sampleData = [
-                { name: "식당1", distance: 5, price: 20 },
-                { name: "식당2", distance: 10, price: 15 },
-                { name: "식당3", distance: 8, price: 25 }
-            ];
+        // 거리순 정렬 버튼 핸들러 (오름차순)
+        const dSortA_Button = document.getElementById("dSortA_Button");
+        dSortA_Button.addEventListener("click", () => {
+            fetch("/dSortA", {method: "POST"})
+            .then((res) => res.json())
+            .then((data) => {
+                // console.log(data);
+                const list = document.querySelector("#muklist");
+                list.innerHTML ="";
+                data.forEach(d => {
+                    addToList(d);
+                });
+            })
+        });
 
-            // 간단한 정렬 예시: 거리순, 메뉴별, 가격순
-            if (sortType === 'distance') {
-                return sampleData.sort((a, b) => a.distance - b.distance);
-            } else if (sortType === 'price') {
-                return sampleData.sort((a, b) => a.price - b.price);
-            }
+        // 거리순 정렬 버튼 핸들러 (내림차순)
+        const dSortD_Button = document.getElementById("dSortD_Button");
+        dSortD_Button.addEventListener("click", () => {
+            fetch("/dSortD", {method: "POST"})
+            .then((res) => res.json())
+            .then((data) => {
+                const list = document.querySelector("#muklist");
+                list.innerHTML ="";
+                data.forEach(d => {
+                    addToList(d);
+                });
+            })
+        });
 
-            return sampleData;
-        }
+        // 가격순 정렬 버튼 핸들러 (오름차순)
+        const pSortA_Button = document.getElementById("pSortA_Button");
+        pSortA_Button.addEventListener("click", () => {
+            fetch("/pSortA", {method: "POST"})
+            .then((res) => res.json())
+            .then((data) => {
+                const list = document.querySelector("#muklist");
+                list.innerHTML ="";
+                data.forEach(d => {
+                    addToList(d);
+                });
+            })
+        });
 
-        function displaySortedRestaurants(sortedRestaurants) {
-            const sortedContainer = document.getElementById("sortedRestaurantContainer");
-            // 기존에 있던 목록 삭제
-            sortedContainer.innerHTML = "";
+        // 가격순 정렬 버튼 핸들러 (내림차순)
+        const pSortD_Button = document.getElementById("pSortD_Button");
+        pSortD_Button.addEventListener("click", () => {
+            fetch("/pSortD", {method: "POST"})
+            .then((res) => res.json())
+            .then((data) => {
+                const list = document.querySelector("#muklist");
+                list.innerHTML = "";
+                data.forEach(d => {
+                    addToList(d);
+                });
+            })
+        });
 
-            // 정렬된 식당 리스트를 화면에 추가
-            sortedRestaurants.forEach(restaurant => {
-                addToList(restaurant, sortedContainer);
-            });
-        }
+        // 메뉴별 분류 버튼 핸들러 (한식)
+        const tagKR_Button = document.getElementById("tagKR_Button");
+        tagKR_Button.addEventListener("click", () => {
+            fetch("/tagKR", {method: "POST"})
+            .then((res) => res.json())
+            .then((data) => {
+                const list = document.querySelector("#muklist");
+                list.innerHTML = "";
+                data.forEach(d => {
+                    addToList(d);
+                });
+            })
+        });
 
-        function showSortedRestaurants(sortType) {
-            // 여기에 각 정렬에 따른 데이터를 불러오고 화면에 보여주는 코드 추가
+        // 메뉴별 분류 버튼 핸들러 (일식)
+        const tagJP_Button = document.getElementById("tagJP_Button");
+        tagJP_Button.addEventListener("click", () => {
+            fetch("/tagJP", {method: "POST"})
+            .then((res) => res.json())
+            .then((data) => {
+                const list = document.querySelector("#muklist");
+                list.innerHTML = "";
+                data.forEach(d => {
+                    addToList(d);
+                });
+            })
+        });
 
+        // 메뉴별 분류 버튼 핸들러 (중식)
+        const tagCN_Button = document.getElementById("tagCN_Button");
+        tagCN_Button.addEventListener("click", () => {
+            fetch("/tagCN", {method: "POST"})
+            .then((res) => res.json())
+            .then((data) => {
+                const list = document.querySelector("#muklist");
+                list.innerHTML = "";
+                data.forEach(d => {
+                    addToList(d);
+                });
+            })
+        });
 
-            // 예시로 데이터를 샘플로 만들어봅니다.
-            const sortedRestaurants = getSortedData(sortType);
+        // 메뉴별 분류 버튼 핸들러 (양식)
+        const tagWS_Button = document.getElementById("tagWS_Button");
+        tagWS_Button.addEventListener("click", () => {
+            fetch("/tagWS", {method: "POST"})
+            .then((res) => res.json())
+            .then((data) => {
+                const list = document.querySelector("#muklist");
+                list.innerHTML = "";
+                data.forEach(d => {
+                    addToList(d);
+                });
+            })
+        });
 
-            // 기존에 있던 목록 삭제
-            const listContainer = document.getElementById("muk-list");
-            listContainer.innerHTML = "";
-
-            // 정렬된 식당 리스트를 화면에 추가
-            sortedRestaurants.forEach(restaurant => {
-                addToList(restaurant, listContainer);
-            });
-        }
-
-
+        // muklist에 데이터 추가
         function addToList(restaurant) {
             let div = document.createElement("div");
             div.classList.add("restaurant-box");
@@ -203,33 +358,57 @@
             div.appendChild(costPerformanceElem);
 
             // data.txt에서 해당 restaurant의 데이터에 따라 태그 삽입 필요
-            let list = document.querySelector("#muk-list")
+            let list = document.querySelector("#muklist")
             list.appendChild(div);
-        }
+        }    
 
-        // 페이지 전환 버튼 
+        // 리스트-룰렛 페이지 전환 버튼 
         const toggleButton = document.getElementById("toggleButton");
         toggleButton.addEventListener("click", togglePages);
 
-        // 페이지 전환 버튼 핸들러
+        // 리스트-룰렛 페이지 전환 버튼 핸들러
         function togglePages() {
+            // document item 로딩
             const listPage = document.getElementById("listPage");
             const sortedListPage = document.getElementById("sortedListPage");
             const roulettePage = document.getElementById("roulettePage");
+            const dSortA_Button = document.getElementById("dSortA_Button");
+            const dSortD_Button = document.getElementById("dSortD_Button");
+            const pSortA_Button = document.getElementById("pSortA_Button");
+            const pSortD_Button = document.getElementById("pSortD_Button");
+            const tagKR_Button = document.getElementById("tagKR_Button");
+            const tagJP_Button = document.getElementById("tagJP_Button");
+            const tagCN_Button = document.getElementById("tagCN_Button");
+            const tagWS_Button = document.getElementById("tagWS_Button");
 
+            // 리스트-룰렛 토글
             if (listPage.style.display === "none") {
                 // 리스트 페이지로 변경
                 listPage.style.display = "flex";
                 roulettePage.style.display = "none";
+                dSortA_Button.style.display = "flex";
+                dSortD_Button.style.display = "flex";
+                pSortA_Button.style.display = "flex";
+                pSortD_Button.style.display = "flex";
+                tagKR_Button.style.display = "flex";
+                tagJP_Button.style.display = "flex";
+                tagCN_Button.style.display = "flex";
+                tagWS_Button.style.display = "flex";
+
             } else {
                 // 룰렛 페이지로 변경
                 listPage.style.display = "none";
                 roulettePage.style.display = "flex";
+                dSortA_Button.style.display = "none";
+                dSortD_Button.style.display = "none";
+                pSortA_Button.style.display = "none";
+                pSortD_Button.style.display = "none";
+                tagKR_Button.style.display = "none";
+                tagJP_Button.style.display = "none";
+                tagCN_Button.style.display = "none";
+                tagWS_Button.style.display = "none";
             }
         }
-        //뒤로가기 버튼 함수
-        function goBack(){
-            window.history.go(-1);
-        }
+
     </script>
 </body>
