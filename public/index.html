@@ -35,22 +35,7 @@
             font-size: 25px;
         }
 
-
-        .navbar {
-            font-size: 45px;
-            font-weight: bold;
-        }
-
-        .restaurant-box {
-            border: 3px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
-            max-width: 400px;
-        }
-
-        .data-box {
-            margin-top: 10px;
-        }
+        
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -122,15 +107,17 @@
             height: 80vh;
         }
 
-        /* Restaurant Box Styles */
+        
         .restaurant-box {
+            flex: 0 0 calc(25% - 10px);
             border: 3px solid #ccc;
             padding: 15px;
-            margin-bottom: 15px;
-            max-width: 400px;
+            margin-bottom: 50px;
+            max-width: 50%;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
         }
 
         /* 데이터박스 스타일링 */
@@ -138,13 +125,13 @@
             margin-top: 10px;
         }
 
-        
+        #muklist {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 2900px; /* navbar 아래 여백 추가 */
+         }
 
-        .restaurant-box {
-            max-width: 100%;
-        }
-
-        
 
     </style>
 
@@ -333,34 +320,44 @@
             nameElem.textContent = restaurant.name;
             div.appendChild(nameElem);
 
-            let locationElem = document.createElement("data-box");
-            locationElem.textContent = restaurant.location;
-            div.appendChild(locationElem);
+            // 데이터를 담을 세부 박스 생성
+            let detailsDiv = document.createElement("div");
+            detailsDiv.classList.add("data-box");
 
-            let distanceElem = document.createElement("data-box");
-            distanceElem.textContent = restaurant.distance;
-            div.appendChild(distanceElem);
+            // 각 데이터 포인트에 대한 세부 박스 생성 및 추가
+            createDetailBox("위치", restaurant.location, detailsDiv);
+            createDetailBox("거리", restaurant.distance, detailsDiv);
+            createDetailBox("장르", restaurant.genre, detailsDiv);
+            createDetailBox("음식 종류", restaurant.foodType, detailsDiv);
+            createDetailBox("가격", restaurant.price, detailsDiv);
+            createDetailBox("성능 대비 가격", restaurant.costPerformance, detailsDiv);
 
-            let genreElem = document.createElement("data-box");
-            genreElem.textContent = restaurant.genre;
-            div.appendChild(genreElem);
+            // 세부 박스를 주요 박스에 추가
+            div.appendChild(detailsDiv);
 
-            let foodTypeElem = document.createElement("data-box");
-            foodTypeElem.textContent = restaurant.foodType;
-            div.appendChild(foodTypeElem);
-
-            let priceElem = document.createElement("data-box");
-            priceElem.textContent = restaurant.price;
-            div.appendChild(priceElem);
-
-            let costPerformanceElem = document.createElement("data-box");
-            costPerformanceElem.textContent = restaurant.costPerformance;
-            div.appendChild(costPerformanceElem);
-
-            // data.txt에서 해당 restaurant의 데이터에 따라 태그 삽입 필요
+            // data.txt에서 해당 레스토랑의 데이터에 따라 태그 삽입 필요
             let list = document.querySelector("#muklist")
             list.appendChild(div);
-        }    
+        }
+
+    // 각 데이터들에 대한 세부 박스를 생성하는함수
+        function createDetailBox(label, value, container) {
+            let detailBox = document.createElement("div");
+            detailBox.classList.add("data-box");
+
+            //데이터 분류 제목 (거리, 장르 등)
+            let labelElem = document.createElement("strong");
+            labelElem.textContent = label + ": ";
+            detailBox.appendChild(labelElem);
+
+            // 값 생성 및 추가
+            let valueElem = document.createElement("span");
+            valueElem.textContent = value;
+            detailBox.appendChild(valueElem);
+
+            // 주요 박스에 세부 박스 추가
+            container.appendChild(detailBox);
+}  
 
         // 리스트-룰렛 페이지 전환 버튼 
         const toggleButton = document.getElementById("toggleButton");

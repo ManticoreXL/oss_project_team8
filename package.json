@@ -1,0 +1,14 @@
+{
+  "name": "oss_project_team8",
+  "version": "1.0.0",
+  "description": "광운대학교 먹리스트 룰렛",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
