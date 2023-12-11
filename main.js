@@ -30,8 +30,12 @@ let sortedList_dist_D = st.sortData(parsedData, "distance", 1);
 let sortedList_price_A = st.sortData(parsedData, "price", 0);
 let sortedList_price_D = st.sortData(parsedData, "price", 1);
 
-// 뽑기
+// 뽑기 데이터 셋업
 let roulette_default = rt.roulette(parsedData);
+let roulette_KR = rt.roulette(tagedList_KR);
+let roulette_JP = rt.roulette(tagedList_JP);
+let roulette_CN = rt.roulette(tagedList_CN);
+let roulette_WS = rt.roulette(tagedList_WS);
 
 // 기본값 데이터 전송
 app.post('/data', (req, res) => {
@@ -75,9 +79,25 @@ app.post('/pSortD', (req, res) => {
     res.send(sortedList_price_D);
 });
 
-// 룰렛 데이터 요청 (기본값)
+// 룰렛 데이터 요청
 app.post('/rtDefault', (req, res) => {
     res.send(roulette_default);
+});
+
+app.post('/rtKR', (req, res) => {
+    res.send(roulette_KR);
+});
+
+app.post('/rtJP', (req, res) => {
+    res.send(roulette_JP);
+});
+
+app.post('/rtCN', (req, res) => {
+    res.send(roulette_CN);
+});
+
+app.post('/rtWS', (req, res) => {
+    res.send(roulette_WS);
 });
 
 // 서버 구동 표시

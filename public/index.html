@@ -33,9 +33,7 @@
 
         #muk-list h4 {
             font-size: 25px;
-        }
-
-        
+        }        
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -143,18 +141,24 @@
             광운대학교 먹리스트
         </div>
 
-        <!-- 페이지 전환 버튼 -->
-        <button id="toggleButton">페이지 전환</button>
-
+        <!-- 기본 데이터 정렬 버튼 -->
         <button id="dSortA_Button">거리순↑</button>
         <button id="dSortD_Button">거리순↓</button>
         <button id="pSortA_Button">가격순↑</button>
         <button id="pSortD_Button">가격순↓</button>
 
+        <!-- 종류별 표시 버튼 -->
         <button id="tagKR_Button">한식만 표시</button>
         <button id="tagJP_Button">일식만 표시</button>
         <button id="tagCN_Button">중식만 표시</button>
         <button id="tagWS_Button">양식만 표시</button>
+
+        <!-- 종류별 뽑기 버튼-->
+        <button id="rtDefault_button">일반 뽑기</button>
+        <button id="rtKR_button">한식 뽑기</button>
+        <button id="rtJP_button">일식 뽑기</button>
+        <button id="rtCN_button">중식 뽑기</button>
+        <button id="rtWS_button">양식 뽑기</button>
     </nav>
 
     <div id="listPage" class="d-flex">
@@ -165,24 +169,6 @@
             </div>
         </div>
     </div>
-
-    <div id="roulettePage" class="d-flex" style="display: none;">
-        <div class="flex-grow-1 rounded-2 me-1 p-2 w-50">
-            <h3>뽑기</h3>
-            <!-- 컨텐츠 추가 필요 -->
-        </div>
-    </div>
-
-    <!-- <div id="menuButtons" class="d-flex" style="display: none;">
-        <div class="flex-grow-1 rounded-2 me-1 p-2 w-50">
-            <h3>메뉴 선택</h3>
-            <div class="menu-buttons">
-                <button type="button" class="btn btn-primary" onclick="showSortedRestaurantsByMenu('한식')">한식</button>
-                <button type="button" class="btn btn-primary" onclick="showSortedRestaurantsByMenu('일식')">일식</button>
-                <button type="button" class="btn btn-primary" onclick="showSortedRestaurantsByMenu('중식')">중식</button>
-            </div>
-        </div>
-    </div> -->
 
     <script>
         // load 핸들러
@@ -310,6 +296,66 @@
             })
         });
 
+        // 기본 뽑기 버튼 핸들러
+        const rtDefault_button = document.getElementById("rtDefault_button");
+        rtDefault_button.addEventListener("click", () => {
+            fetch("/rtDefault", {method: "POST"})
+            .then((res) => res.json())
+            .then((data) => {
+                const list = document.querySelector("#muklist");
+                list.innerHTML = "";
+                addToList(data);
+            })
+        });
+
+        // 한식 뽑기 버튼 핸들러
+        const rtKR_button = document.getElementById("rtKR_button");
+        rtKR_button.addEventListener("click", () => {
+            fetch("/rtKR", {method: "POST"})
+            .then((res) => res.json())
+            .then((data) => {
+                const list = document.querySelector("#muklist");
+                list.innerHTML = "";
+                addToList(data);
+            })
+        });
+
+        // 일식 뽑기 버튼 핸들러
+        const rtJP_button = document.getElementById("rtJP_button");
+        rtJP_button.addEventListener("click", () => {
+            fetch("/rtJP", {method: "POST"})
+            .then((res) => res.json())
+            .then((data) => {
+                const list = document.querySelector("#muklist");
+                list.innerHTML = "";
+                addToList(data);
+            })
+        });
+
+        // 중식 뽑기 버튼 핸들러
+        const rtCN_button = document.getElementById("rtCN_button");
+        rtCN_button.addEventListener("click", () => {
+            fetch("/rtCN", {method: "POST"})
+            .then((res) => res.json())
+            .then((data) => {
+                const list = document.querySelector("#muklist");
+                list.innerHTML = "";
+                addToList(data);
+            })
+        });
+
+        // 양식 뽑기 버튼 핸들러
+        const rtWS_button = document.getElementById("rtWS_button");
+        rtWS_button.addEventListener("click", () => {
+            fetch("/rtWS", {method: "POST"})
+            .then((res) => res.json())
+            .then((data) => {
+                const list = document.querySelector("#muklist");
+                list.innerHTML = "";
+                addToList(data);
+            })
+        });
+
         // muklist에 데이터 추가
         function addToList(restaurant) {
             let div = document.createElement("div");
@@ -340,7 +386,7 @@
             list.appendChild(div);
         }
 
-    // 각 데이터들에 대한 세부 박스를 생성하는함수
+        // 각 데이터들에 대한 세부 박스를 생성하는함수
         function createDetailBox(label, value, container) {
             let detailBox = document.createElement("div");
             detailBox.classList.add("data-box");
@@ -357,55 +403,6 @@
 
             // 주요 박스에 세부 박스 추가
             container.appendChild(detailBox);
-}  
-
-        // 리스트-룰렛 페이지 전환 버튼 
-        const toggleButton = document.getElementById("toggleButton");
-        toggleButton.addEventListener("click", togglePages);
-
-        // 리스트-룰렛 페이지 전환 버튼 핸들러
-        function togglePages() {
-            // document item 로딩
-            const listPage = document.getElementById("listPage");
-            const sortedListPage = document.getElementById("sortedListPage");
-            const roulettePage = document.getElementById("roulettePage");
-            const dSortA_Button = document.getElementById("dSortA_Button");
-            const dSortD_Button = document.getElementById("dSortD_Button");
-            const pSortA_Button = document.getElementById("pSortA_Button");
-            const pSortD_Button = document.getElementById("pSortD_Button");
-            const tagKR_Button = document.getElementById("tagKR_Button");
-            const tagJP_Button = document.getElementById("tagJP_Button");
-            const tagCN_Button = document.getElementById("tagCN_Button");
-            const tagWS_Button = document.getElementById("tagWS_Button");
-
-            // 리스트-룰렛 토글
-            if (listPage.style.display === "none") {
-                // 리스트 페이지로 변경
-                listPage.style.display = "flex";
-                roulettePage.style.display = "none";
-                dSortA_Button.style.display = "flex";
-                dSortD_Button.style.display = "flex";
-                pSortA_Button.style.display = "flex";
-                pSortD_Button.style.display = "flex";
-                tagKR_Button.style.display = "flex";
-                tagJP_Button.style.display = "flex";
-                tagCN_Button.style.display = "flex";
-                tagWS_Button.style.display = "flex";
-
-            } else {
-                // 룰렛 페이지로 변경
-                listPage.style.display = "none";
-                roulettePage.style.display = "flex";
-                dSortA_Button.style.display = "none";
-                dSortD_Button.style.display = "none";
-                pSortA_Button.style.display = "none";
-                pSortD_Button.style.display = "none";
-                tagKR_Button.style.display = "none";
-                tagJP_Button.style.display = "none";
-                tagCN_Button.style.display = "none";
-                tagWS_Button.style.display = "none";
-            }
-        }
-
+        } 
     </script>
 </body>
